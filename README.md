@@ -24,7 +24,7 @@ While there are plenty of public datasets available for experimentation, researc
 
 3. Document the data
 
-4. Make credentials to the postgreSQL database available to women for research and learning purposes. 
+4. Reporting and Accountability
 
 ## (How?)
 
