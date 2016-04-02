@@ -2,6 +2,7 @@ import git
 from git import Git
 from shutil import copyfile
 import datetime
+import os
 
 # Grab todays date
 now = datetime.datetime.now()
@@ -16,8 +17,14 @@ loginfo = cloned_repo.log('--format=format:%H', '--since=%s' % now, '--', 'data.
 # Converting it into an array
 loginfo_array = loginfo.split('\n')
 
+# Remove filepath if exists
+try:
+    os.remove("/datasets/tracy_data/new_to_parse.txt")
+except OSError:
+    pass
+
+ntp = open("/datasets/tracy_data/new_to_parse.txt","w+")
 # Run only if there have been commits
-ntp = open("/datasets/tracy_data/new_to_parse.txt")
 if len(loginfo_array) > 1:
 	for hexsha in loginfo_array:
 		cloned_repo1.checkout(hexsha)
