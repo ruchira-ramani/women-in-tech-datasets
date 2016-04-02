@@ -1,12 +1,7 @@
 
 db_passwords.py
 
-wit-data/.Python
-
-wit-data/bin/*
-wit-data/lib/*
-
-wit-data/include/python3.4m
+wit-data/*
 
 db_passwords.txt
 
