@@ -1,23 +1,27 @@
-#TODO: Need to comment out the clone repo command after first run
-#TODO: Handle historic data efficiently (right now if I make an update I will pull up all history, tomorrow again if I make an update it will again pull up all of history)
-#use -n 10 to get the last 10 commits (loginfo)
-
 import git
 from git import Git
 from shutil import copyfile
+import datetime
 
-# Cloning Tracy's repo (One time clone)
-#git.Git().clone("https://github.com/triketora/women-in-software-eng.git", "/women-in-tech-datasets/triketora")
+# Grab todays date
+now = datetime.datetime.now()
+now = now.strftime("%Y-%m-%d")
 
 # Git pull (cron job)
 cloned_repo = git.cmd.Git("/women-in-tech-datasets/triketora")
 cloned_repo1 = Git("/women-in-tech-datasets/triketora")
 
-# Getting sha for historic commits
-loginfo = cloned_repo.log('--format=format:%H', '--', '--', 'data.txt') 
+# Getting sha for historic commits since last successfull run
+loginfo = cloned_repo.log('--format=format:%H', '--since=%s' % now, '--', 'data.txt')
 # Converting it into an array
 loginfo_array = loginfo.split('\n')
 
-for hexsha in loginfo_array:
-	cloned_repo1.checkout(hexsha)
-	copyfile("/women-in-tech-datasets/triketora/data.txt", "/datasets/company_coder_gender_stats/data_%s.txt" % hexsha)	
+# Run only if there have been commits
+if len(loginfo_array) > 1:
+	for hexsha in loginfo_array:
+		cloned_repo1.checkout(hexsha)
+		copyfile("/women-in-tech-datasets/triketora/data.txt", "/datasets/company_coder_gender_stats/data_%s.txt" % hexsha)
+
+f = open("/datasets/tracy_data/success_runDate.txt", "w+")
+f.write(now)
+f.close()
