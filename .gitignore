@@ -7,3 +7,7 @@ wit-data/bin/*
 wit-data/lib/*
 
 wit-data/include/python3.4m
+
+db_passwords.txt
+
+etl/env_settings.py
