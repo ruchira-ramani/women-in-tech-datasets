@@ -1,5 +1,6 @@
 #TODO: Need to comment out the clone repo command after first run
 #TODO: Handle historic data efficiently (right now if I make an update I will pull up all history, tomorrow again if I make an update it will again pull up all of history)
+#use -n 10 to get the last 10 commits (loginfo)
 
 import git
 from git import Git
