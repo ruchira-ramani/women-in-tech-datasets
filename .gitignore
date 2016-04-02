@@ -1,8 +1,5 @@
 
-db_passwords.py
-
 wit-data/*
-
+db_passwords.py
 db_passwords.txt
-
 etl/env_settings.py
