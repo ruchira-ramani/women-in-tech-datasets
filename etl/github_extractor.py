@@ -17,10 +17,13 @@ loginfo = cloned_repo.log('--format=format:%H', '--since=%s' % now, '--', 'data.
 loginfo_array = loginfo.split('\n')
 
 # Run only if there have been commits
+ntp = open("/datasets/tracy_data/new_to_parse.txt")
 if len(loginfo_array) > 1:
 	for hexsha in loginfo_array:
 		cloned_repo1.checkout(hexsha)
 		copyfile("/women-in-tech-datasets/triketora/data.txt", "/datasets/company_coder_gender_stats/data_%s.txt" % hexsha)
+		ntp.append("data_%s.txt" % hexsha)
+ntp.close()
 
 f = open("/datasets/tracy_data/success_runDate.txt", "w+")
 f.write(now)
