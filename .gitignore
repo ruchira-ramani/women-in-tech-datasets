@@ -1,0 +1,4 @@
+wit-data/*
+db_passwords.txt
+
+etl/env_settings.py
